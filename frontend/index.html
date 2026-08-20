@@ -1,137 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>AI Interview Coach</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Interview Coach — Master Your Next Role</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="rail">
-    <div class="rail-brand">
-      <span class="rail-brand-mark">◈</span>
-      <span class="rail-brand-text">Interview<br/>Coach</span>
-    </div>
-    <ol class="rail-steps" id="railSteps">
-      <li data-step="setup" class="active"><span class="num">01</span><span class="label">Green Room</span></li>
-      <li data-step="questions"><span class="num">02</span><span class="label">On Stage</span></li>
-      <li data-step="results"><span class="num">03</span><span class="label">Debrief</span></li>
-    </ol>
-    <div class="rail-footer">
-    </div>
-  </div>
 
+  <!-- SIDEBAR NAVIGATION -->
+  <aside class="rail">
+    <div class="rail-brand">
+      <div class="rail-brand-icon">◈</div>
+      <div class="rail-brand-text">
+        <span>Interview</span>
+        <strong>Coach AI</strong>
+      </div>
+    </div>
+
+    <ol class="rail-steps" id="railSteps">
+      <li data-step="setup" class="active">
+        <span class="num">01</span>
+        <div class="step-meta">
+          <span class="label">Green Room</span>
+          <span class="sublabel">Setup & Role</span>
+        </div>
+      </li>
+      <li data-step="questions">
+        <span class="num">02</span>
+        <div class="step-meta">
+          <span class="label">On Stage</span>
+          <span class="sublabel">Live Questions</span>
+        </div>
+      </li>
+      <li data-step="results">
+        <span class="num">03</span>
+        <div class="step-meta">
+          <span class="label">Debrief</span>
+          <span class="sublabel">Analysis & Score</span>
+        </div>
+      </li>
+    </ol>
+
+    <div class="rail-footer">
+      <div class="status-indicator">
+        <span class="pulse-dot"></span>
+        <span class="status-text">AI Engine Active</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN STAGE -->
   <main class="stage">
 
     <!-- STEP 1: SETUP -->
     <section id="view-setup" class="view active">
-      <div class="eyebrow">Before the lights come up</div>
-      <h1>Step into the green room.</h1>
-      <p class="lede">Pick a role, tell us who's interviewing, and we'll draft a question set built for the part.</p>
+      <div class="view-header">
+        <span class="eyebrow">Before the lights come up</span>
+        <h1 class="headline">Step into the green room.</h1>
+        <p class="lede">Select your target position, configure session intensity, and let the AI generate a tailored assessment tailored to your domain.</p>
+      </div>
 
       <form id="setupForm" class="panel">
-        <div class="field">
-          <label>Your name</label>
-          <input required name="userName" placeholder="Jane Doe" />
-        </div>
-        <div class="field">
-          <label>Your email <span class="hint">— your report is sent here</span></label>
-          <input required type="email" name="userEmail" placeholder="jane@example.com" />
+        <div class="form-grid">
+          <div class="field">
+            <label for="userName">Candidate Name</label>
+            <input required id="userName" name="userName" placeholder="e.g. Alex Morgan" spellcheck="false" autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="userEmail">Delivery Email <span class="hint">— report sent here</span></label>
+            <input required type="email" id="userEmail" name="userEmail" placeholder="alex@company.com" autocomplete="email" />
+          </div>
         </div>
 
         <div class="field">
-          <label>Role</label>
-          <div class="role-grid" id="roleGrid"><!-- populated by JS --></div>
+          <label>Target Role</label>
+          <div class="role-grid" id="roleGrid">
+            <!-- Populated dynamically by JS -->
+          </div>
           <input type="hidden" name="role" required />
         </div>
 
-        <div class="field-row">
+        <div class="form-grid">
           <div class="field">
-            <label>Difficulty</label>
-            <select name="difficulty">
-              <option value="beginner">Beginner</option>
-              <option value="intermediate" selected>Intermediate</option>
-              <option value="advanced">Advanced</option>
-            </select>
+            <label for="difficulty">Seniority & Depth</label>
+            <div class="select-wrapper">
+              <select id="difficulty" name="difficulty">
+                <option value="beginner">Junior / Foundational</option>
+                <option value="intermediate" selected>Mid-Level / Practical</option>
+                <option value="advanced">Senior / Architectural</option>
+              </select>
+            </div>
           </div>
           <div class="field">
-            <label># of questions</label>
-            <select name="numberOfQuestions">
-              <option value="5" selected>5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="10">10</option>
-            </select>
+            <label for="numberOfQuestions">Question Count</label>
+            <div class="select-wrapper">
+              <select id="numberOfQuestions" name="numberOfQuestions">
+                <option value="5" selected>5 Questions (Standard)</option>
+                <option value="6">6 Questions</option>
+                <option value="7">7 Questions</option>
+                <option value="8">8 Questions</option>
+                <option value="10">10 Questions (Intensive)</option>
+              </select>
+            </div>
           </div>
         </div>
 
         <div class="field">
-          <label>Custom job description <span class="hint">— optional, sharpens the questions</span></label>
-          <textarea name="jobDescription" rows="3" placeholder="Paste a job description for more tailored questions…"></textarea>
+          <label for="jobDescription">Target Job Description <span class="hint">— optional, aligns prompts with specific job requirements</span></label>
+          <textarea id="jobDescription" name="jobDescription" rows="3" placeholder="Paste key responsibilities or required qualifications from a job posting…"></textarea>
         </div>
 
-        <button type="submit" class="btn-primary" id="startBtn">
-          <span>Walk on stage</span>
-        </button>
-        <p class="error" id="setupError"></p>
+        <div class="panel-action">
+          <button type="submit" class="btn-primary" id="startBtn">
+            <span>Walk on Stage &rarr;</span>
+          </button>
+        </div>
+        <p class="error-msg" id="setupError"></p>
       </form>
     </section>
 
     <!-- STEP 2: QUESTIONS -->
     <section id="view-questions" class="view">
-      <div class="eyebrow" id="questionsEyebrow">On stage</div>
-      <h1 id="questionsRole">Interview in progress</h1>
-      <p class="lede">Answer at your own pace — one at a time, or all at once, then submit the whole set.</p>
+      <div class="view-header">
+        <span class="eyebrow" id="questionsEyebrow">Live Assessment</span>
+        <h1 class="headline" id="questionsRole">Interview in Progress</h1>
+        <p class="lede">Articulate your reasoning thoroughly. Structure answers with context, methodology, and trade-offs.</p>
+      </div>
 
-      <div id="questionsList" class="questions-list"><!-- populated by JS --></div>
+      <div id="questionsList" class="questions-list">
+        <!-- Populated dynamically by JS -->
+      </div>
 
       <div class="stage-actions">
-        <button class="btn-secondary" id="saveDraftBtn">Save answers</button>
-        <button class="btn-primary" id="finishBtn">Finish &amp; analyze</button>
+        <button type="button" class="btn-secondary" id="saveDraftBtn">Save Draft</button>
+        <button type="button" class="btn-primary" id="finishBtn">Finish &amp; Score &rarr;</button>
       </div>
-      <p class="error" id="questionsError"></p>
+      <p class="error-msg" id="questionsError"></p>
     </section>
 
     <!-- STEP 3: RESULTS -->
     <section id="view-results" class="view">
-      <div class="eyebrow">The verdict</div>
-      <h1>Debrief.</h1>
-      <p class="lede" id="resultsSub">Here's how it went.</p>
+      <div class="view-header">
+        <span class="eyebrow">Performance Assessment</span>
+        <h1 class="headline">Candidate Debrief</h1>
+        <p class="lede" id="resultsSub">Comprehensive evaluation and technical score breakdown.</p>
+      </div>
 
-      <div class="scorecards" id="scorecards"><!-- populated by JS --></div>
+      <div class="scorecards" id="scorecards">
+        <!-- Populated dynamically by JS -->
+      </div>
 
       <div class="report-grid">
-        <div class="report-card">
-          <h3>Strengths</h3>
+        <div class="report-card card-strengths">
+          <div class="card-title">
+            <span class="badge-icon">✓</span>
+            <h3>Demonstrated Strengths</h3>
+          </div>
           <ul id="strengthsList"></ul>
         </div>
-        <div class="report-card">
-          <h3>Weaknesses</h3>
+        <div class="report-card card-weaknesses">
+          <div class="card-title">
+            <span class="badge-icon">△</span>
+            <h3>Identified Blind Spots</h3>
+          </div>
           <ul id="weaknessesList"></ul>
         </div>
-        <div class="report-card">
-          <h3>Areas for improvement</h3>
+        <div class="report-card card-improvements">
+          <div class="card-title">
+            <span class="badge-icon">⚡</span>
+            <h3>Areas for Improvement</h3>
+          </div>
           <ul id="improvementsList"></ul>
         </div>
-        <div class="report-card">
-          <h3>Suggested resources</h3>
+        <div class="report-card card-resources">
+          <div class="card-title">
+            <span class="badge-icon">📖</span>
+            <h3>Recommended Resources</h3>
+          </div>
           <ul id="resourcesList"></ul>
         </div>
       </div>
 
-      <div class="report-card recommendation">
-        <h3>Hiring recommendation</h3>
-        <p id="recommendationText"></p>
+      <div class="report-card recommendation-box">
+        <div class="card-title">
+          <span class="badge-icon">★</span>
+          <h3>Hiring Committee Recommendation</h3>
+        </div>
+        <p id="recommendationText" class="recommendation-body"></p>
       </div>
 
       <div class="stage-actions">
-        <button class="btn-secondary" id="restartBtn">Start a new interview</button>
-        <button class="btn-primary" id="emailBtn">Email me this report</button>
+        <button type="button" class="btn-secondary" id="restartBtn">Start New Interview</button>
+        <button type="button" class="btn-primary" id="emailBtn">
+          <span>Email Full Report</span>
+        </button>
       </div>
-      <p class="success" id="emailStatus"></p>
+      <p class="status-banner" id="emailStatus"></p>
     </section>
 
   </main>
