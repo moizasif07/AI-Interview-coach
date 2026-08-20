@@ -14,6 +14,10 @@ export class InterviewsController {
   listRoles() {
     return { roles: this.interviewsService.getAvailableRoles() };
   }
+  @Get('/debug-sentry')
+  getError() {
+    throw new Error('My Sentry integration is successfully configured!');
+  }
 
   @Get()
   @ApiOperation({ summary: 'List all interviews (or filter by candidate email for history)' })
