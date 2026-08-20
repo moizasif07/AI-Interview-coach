@@ -1,0 +1,43 @@
+# ========================
+# Backend (NestJS & Node)
+# ========================
+# Node dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# NestJS build output
+dist/
+build/
+
+# Secrets and Environment Variables
+.env
+.env.*
+!.env.example
+
+# SQLite Database (Keeps your local test data from pushing to GitHub)
+data/
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+
+# ========================
+# Frontend (Static / Tools)
+# ========================
+# Cache and build files (if you ever upgrade to Vite/React)
+.vercel/
+.netlify/
+
+# ========================
+# OS & Editor Files
+# ========================
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE settings
+.vscode/
+.idea/
+*.swp

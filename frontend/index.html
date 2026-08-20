@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Interview Coach</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="rail">
+    <div class="rail-brand">
+      <span class="rail-brand-mark">◈</span>
+      <span class="rail-brand-text">Interview<br/>Coach</span>
+    </div>
+    <ol class="rail-steps" id="railSteps">
+      <li data-step="setup" class="active"><span class="num">01</span><span class="label">Green Room</span></li>
+      <li data-step="questions"><span class="num">02</span><span class="label">On Stage</span></li>
+      <li data-step="results"><span class="num">03</span><span class="label">Debrief</span></li>
+    </ol>
+    <div class="rail-footer">
+      <label for="apiBase">API base</label>
+      <input id="apiBase" value="http://localhost:3000" spellcheck="false" />
+    </div>
+  </div>
+
+  <main class="stage">
+
+    <!-- STEP 1: SETUP -->
+    <section id="view-setup" class="view active">
+      <div class="eyebrow">Before the lights come up</div>
+      <h1>Step into the green room.</h1>
+      <p class="lede">Pick a role, tell us who's interviewing, and we'll draft a question set built for the part.</p>
+
+      <form id="setupForm" class="panel">
+        <div class="field">
+          <label>Your name</label>
+          <input required name="userName" placeholder="Jane Doe" />
+        </div>
+        <div class="field">
+          <label>Your email <span class="hint">— your report is sent here</span></label>
+          <input required type="email" name="userEmail" placeholder="jane@example.com" />
+        </div>
+
+        <div class="field">
+          <label>Role</label>
+          <div class="role-grid" id="roleGrid"><!-- populated by JS --></div>
+          <input type="hidden" name="role" required />
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Difficulty</label>
+            <select name="difficulty">
+              <option value="beginner">Beginner</option>
+              <option value="intermediate" selected>Intermediate</option>
+              <option value="advanced">Advanced</option>
+            </select>
+          </div>
+          <div class="field">
+            <label># of questions</label>
+            <select name="numberOfQuestions">
+              <option value="5" selected>5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Custom job description <span class="hint">— optional, sharpens the questions</span></label>
+          <textarea name="jobDescription" rows="3" placeholder="Paste a job description for more tailored questions…"></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary" id="startBtn">
+          <span>Walk on stage</span>
+        </button>
+        <p class="error" id="setupError"></p>
+      </form>
+    </section>
+
+    <!-- STEP 2: QUESTIONS -->
+    <section id="view-questions" class="view">
+      <div class="eyebrow" id="questionsEyebrow">On stage</div>
+      <h1 id="questionsRole">Interview in progress</h1>
+      <p class="lede">Answer at your own pace — one at a time, or all at once, then submit the whole set.</p>
+
+      <div id="questionsList" class="questions-list"><!-- populated by JS --></div>
+
+      <div class="stage-actions">
+        <button class="btn-secondary" id="saveDraftBtn">Save answers</button>
+        <button class="btn-primary" id="finishBtn">Finish &amp; analyze</button>
+      </div>
+      <p class="error" id="questionsError"></p>
+    </section>
+
+    <!-- STEP 3: RESULTS -->
+    <section id="view-results" class="view">
+      <div class="eyebrow">The verdict</div>
+      <h1>Debrief.</h1>
+      <p class="lede" id="resultsSub">Here's how it went.</p>
+
+      <div class="scorecards" id="scorecards"><!-- populated by JS --></div>
+
+      <div class="report-grid">
+        <div class="report-card">
+          <h3>Strengths</h3>
+          <ul id="strengthsList"></ul>
+        </div>
+        <div class="report-card">
+          <h3>Weaknesses</h3>
+          <ul id="weaknessesList"></ul>
+        </div>
+        <div class="report-card">
+          <h3>Areas for improvement</h3>
+          <ul id="improvementsList"></ul>
+        </div>
+        <div class="report-card">
+          <h3>Suggested resources</h3>
+          <ul id="resourcesList"></ul>
+        </div>
+      </div>
+
+      <div class="report-card recommendation">
+        <h3>Hiring recommendation</h3>
+        <p id="recommendationText"></p>
+      </div>
+
+      <div class="stage-actions">
+        <button class="btn-secondary" id="restartBtn">Start a new interview</button>
+        <button class="btn-primary" id="emailBtn">Email me this report</button>
+      </div>
+      <p class="success" id="emailStatus"></p>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
