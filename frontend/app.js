@@ -8,7 +8,7 @@ const $ = (sel) => document.querySelector(sel);
 const apiBaseInput = $('#apiBase');
 
 function apiBase() {
-  return apiBaseInput.value.replace(/\/$/, '');
+  return 'https://ai-coach-api-moiz.onrender.com';
 }
 
 async function api(path, options = {}) {
