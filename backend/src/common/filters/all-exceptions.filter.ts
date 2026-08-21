@@ -19,7 +19,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
         : 'Internal server error';
 
     // Report unexpected (non-HTTP / 5xx) errors to Sentry
-    if (!(exception instanceof HttpException) || status >= 500) {
+    if (!(exception instanceof HttpException) || status >= 400) {
       Sentry.captureException(exception);
       if (exception instanceof Error) {
         this.logger.error(exception.stack);
